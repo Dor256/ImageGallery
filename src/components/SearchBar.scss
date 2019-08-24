@@ -1,8 +1,17 @@
+.navbar {
+    width: 100%;
+}
+
 form {
     width: 100%;
-    margin: auto 40%;
+    margin: auto 40% auto 30%;
 }
 
 .form-group {
     margin-top: 5%;
+}
+
+.form-control {
+    width: 90%;
+    margin: 0;
 }

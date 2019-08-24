@@ -1,10 +1,41 @@
 .card {
     flex-grow: 1;
     flex-shrink: 1;
+    cursor: pointer;
+}
+
+.card:hover {
+    background: rgba(0, 0, 0, 0.7);
+    .card-img-top {
+        opacity: 0.3;
+    }
+
+    .layout {
+        opacity: 1;
+    }
+}
+
+.layout {
+    display: flex;
+    position: absolute;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 .card-img-top {
     width: auto;
     height: 150px;
-    cursor: pointer;
+}
+
+.expand {
+    background: none;
+    border: none;
+    font-size: 150%;
+}
+
+.expand:focus {
+    outline: none;
 }

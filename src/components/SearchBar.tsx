@@ -23,16 +23,19 @@ class SearchBar extends React.Component<Props, State> {
     
     render() {
         return (
-            <form action="" onSubmit={this.onFormSubmit}>
-                <div className="form-group">
-                    <input 
-                        className="form-control" 
-                        type="text" 
-                        onChange={this.onInputChange}
-                        placeholder="Search for Images"
-                    />
-                </div>
-            </form>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a className="navbar-brand" href="/">Gallery</a>
+                <form action="" onSubmit={this.onFormSubmit}>
+                    <div className="form-group">
+                        <input 
+                            className="form-control" 
+                            type="text" 
+                            onChange={this.onInputChange}
+                            placeholder="Search for Images"
+                        />
+                    </div>
+                </form>
+            </nav>
         );
     }
 }

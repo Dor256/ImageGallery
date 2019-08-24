@@ -1,0 +1,21 @@
+.modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    overflow: hidden;
+    position: fixed;
+}
+
+.show {
+    display: block;
+}
+
+.modal-image {
+    background-color: white;
+    width: 60%;
+    height: 70%;
+    margin: 5% 20% auto 20%;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
