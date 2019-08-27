@@ -1,5 +1,5 @@
 .modal {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.9);
     text-align: center;
     overflow: hidden;
     position: fixed;
@@ -11,11 +11,33 @@
 
 .modal-image {
     background-color: white;
-    width: 60%;
-    height: 70%;
+    height: 80vh;
     margin: 5% 20% auto 20%;
 }
 
 .no-scroll {
     overflow: hidden;
+}
+
+.arrow {
+    color: rgb(0, 132, 255);
+    font-size: 5em;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    opacity: 1;
+}
+
+.fa-angle-right {
+    position: absolute;
+    right: 5%;
+    top: 45%;
+}
+
+.fa-angle-left {
+    position: absolute;
+    left: 5%;
+    top: 45%;
 }

@@ -24,7 +24,7 @@ class SearchBar extends React.Component<Props, State> {
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a className="navbar-brand" href="/">Gallery</a>
+                <a className="navbar-brand" href="/"><i className="fas fa-camera-retro"></i></a>
                 <form action="" onSubmit={this.onFormSubmit}>
                     <div className="form-group">
                         <input 

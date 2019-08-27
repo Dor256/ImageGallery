@@ -1,14 +1,16 @@
 import React from "react";
+import "./ImageCard.scss";
 
 type Props = {
     thumbnailURL: string,
     imageURL: string,
-    enlargeImage: (url: string) => void;
+    index: number,
+    enlargeImage: (url: string, index: number) => void;
 }
 
 const ImageCard = (props: Props) => {
     const handleClick = () => {
-        props.enlargeImage(props.imageURL);
+        props.enlargeImage(props.imageURL, props.index);
     }
 
     return (
