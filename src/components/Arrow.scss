@@ -1,0 +1,27 @@
+.arrow {
+    position: absolute;
+    color: rgb(0, 132, 255);
+    font-size: 5em;
+    opacity: 0.5;
+    cursor: pointer;
+    width: 10%;
+    height: 39%;
+    text-align: bottom;
+    top: 30%;
+    padding-top: 6%;
+    user-select: none;
+}
+
+.arrow:hover {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 3%;
+}
+
+.arrow-right {
+    right: 5%;
+}
+
+.arrow-left {
+    left: 5%;
+}

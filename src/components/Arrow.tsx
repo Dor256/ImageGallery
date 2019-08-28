@@ -1,4 +1,5 @@
 import React, { MouseEvent } from "react";
+import "./Arrow.scss";
 
 type Props = {
     right?: boolean,
@@ -18,7 +19,11 @@ const Arrow = (props: Props) => {
     }
 
     const orientation = props.right ? "right" : "left";
-    return <i className={`fas fa-angle-${orientation} arrow`} onClick={handleClick}></i>;
+    return (
+        <div className={`arrow arrow-${orientation}`} onClick={handleClick}>
+            <i className={`fas fa-angle-${orientation}`}></i>
+        </div>
+    );
 }
 
 export default Arrow;

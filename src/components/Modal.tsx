@@ -27,6 +27,7 @@ const Modal = (props: Props) => {
             <img src={props.image} className="modal-image" alt="" onClick={handlePropagation}/>
             <Arrow right nextImage={props.nextImage}/>
             <Arrow left previousImage={props.previousImage}/>
+            <i className="fas fa-times close-button" onClick={closeModal}></i>
         </div>,
         document.querySelector("#modal")!
     );

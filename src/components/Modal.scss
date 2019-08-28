@@ -15,29 +15,19 @@
     margin: 5% 20% auto 20%;
 }
 
+.close-button {
+    position: absolute;
+    color: rgb(100, 100, 100);
+    top: 2%;
+    right: 2%;
+    cursor: pointer;
+    font-size: 2em;
+}
+
+.close-button:hover {
+    color: rgb(161, 161, 161);
+}
+
 .no-scroll {
     overflow: hidden;
-}
-
-.arrow {
-    color: rgb(0, 132, 255);
-    font-size: 5em;
-    opacity: 0.5;
-    cursor: pointer;
-}
-
-.arrow:hover {
-    opacity: 1;
-}
-
-.fa-angle-right {
-    position: absolute;
-    right: 5%;
-    top: 45%;
-}
-
-.fa-angle-left {
-    position: absolute;
-    left: 5%;
-    top: 45%;
 }
