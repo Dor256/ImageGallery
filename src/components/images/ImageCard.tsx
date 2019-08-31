@@ -8,19 +8,37 @@ type Props = {
     enlargeImage: (url: string, index: number) => void;
 }
 
-const ImageCard = (props: Props) => {
-    const handleClick = () => {
-        props.enlargeImage(props.imageURL, props.index);
+type State = {
+    isLiked: boolean
+}
+
+class ImageCard extends React.Component<Props, State> {
+    state = { isLiked: false };
+
+    handleExpand = () => {
+        this.props.enlargeImage(this.props.imageURL, this.props.index);
     }
 
-    return (
-        <div className="card">
-            <img className="card-img-top" src={props.thumbnailURL} alt=""/>
-            <div className="layout" onClick={handleClick}>
-                <button className="expand"><i className="fas fa-search-plus"></i></button>
+    handleLike = () => {
+        this.state.isLiked ? this.setState({ isLiked: false }) : this.setState({ isLiked: true });
+    }
+
+    renderLikeButton = () => {
+        const likedClassName = this.state.isLiked ? "liked" : "";
+        return <button className={`like image-button ${likedClassName}`} onClick={this.handleLike}><i className="fas fa-heart"></i></button>;
+    }
+
+    render() {
+        return (
+            <div className="card">
+                <img className="card-img-top" src={this.props.thumbnailURL} alt=""/>
+                <div className="overlay">
+                    <button className="expand image-button" onClick={this.handleExpand}><i className="fas fa-search-plus"></i></button>
+                    {this.renderLikeButton()}
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default ImageCard;

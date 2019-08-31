@@ -2,7 +2,6 @@ import React from "react";
 import { ImageResult } from "../../models/UnsplashResponse";
 import Modal from "../Modal";
 import ImageCard from "./ImageCard";
-import "./ImageList.scss";
 
 type Props = {
     images: ImageResult[]
