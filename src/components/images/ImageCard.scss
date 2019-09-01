@@ -18,6 +18,7 @@
 .overlay {
     display: flex;
     position: absolute;
+    flex-wrap: wrap;
     opacity: 0;
     align-items: center;
     justify-content: space-evenly;
@@ -28,6 +29,7 @@
 .card-img-top {
     width: auto;
     height: 150px;
+    min-width: 101px;
 }
 
 .image-button {
@@ -39,30 +41,38 @@
     border-radius: 30%;
 }
 
-.expand:hover {
-    color: rgb(0, 81, 255);
+.image-button:focus {
+    outline: none;
 }
 
-.expand:focus {
-    outline: none;
+.expand:hover {
+    color: rgb(0, 81, 255);
+    background-color: rgba(84, 111, 201, 0.623);
 }
 
 .like:hover {
     color: rgb(192, 56, 56);
-}
-
-.like:focus {
-    outline: none;
+    background-color: rgba(155, 89, 89, 0.623);
 }
 
 .liked {
     color: rgb(192, 56, 56);
+    background-color: rgba(155, 89, 89, 0.623);
+}
+
+.flip:hover {
+    color: rgb(50, 156, 76);
+    background-color: rgba(78, 134, 82, 0.623);
+}
+
+.flipped {
+    transform: scaleX(-1);
 }
 
 .fas {
     user-select: none;
 }
 
-.catd-img-top {
+.card-img-top {
     user-select: none;
 }
