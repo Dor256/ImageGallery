@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React from "react";
 import "./ImageCard.scss";
 
 type Props = {
@@ -9,12 +9,12 @@ type Props = {
 }
 
 type State = {
-    isLiked: boolean
+    isLiked: boolean,
+    isFlipped: boolean
 }
 
 class ImageCard extends React.Component<Props, State> {
-    private imgRef = createRef<HTMLImageElement>();
-    state = { isLiked: false };
+    state = { isLiked: false, isFlipped: false };
 
     handleExpand = () => {
         this.props.enlargeImage(this.props.imageURL, this.props.index);
@@ -25,20 +25,23 @@ class ImageCard extends React.Component<Props, State> {
     }
 
     handleRotation = () => {
-        if(this.imgRef.current) {
-            this.imgRef.current.classList.toggle("flipped");
-        }
+        this.state.isFlipped ? this.setState({ isFlipped: false }) : this.setState({ isFlipped: true });
+    }
+
+    renderCardImage = () => {
+        const flipImageClass = this.state.isFlipped ? "flipped" : "";
+        return <img className={`card-img-top ${flipImageClass}`} src={this.props.thumbnailURL} alt=""/>;
     }
 
     renderLikeButton = () => {
-        const likedClassName = this.state.isLiked ? "liked" : "";
-        return <button className={`like image-button ${likedClassName}`} onClick={this.handleLike}><i className="fas fa-heart"></i></button>;
+        const likedImageClass = this.state.isLiked ? "liked" : "";
+        return <button className={`like image-button ${likedImageClass}`} onClick={this.handleLike}><i className="fas fa-heart"></i></button>;
     }
 
     render() {
         return (
             <div className="card">
-                <img className="card-img-top" src={this.props.thumbnailURL} ref={this.imgRef} alt=""/>
+                {this.renderCardImage()}
                 <div className="overlay">
                     <button className="expand image-button" onClick={this.handleExpand}><i className="fas fa-search-plus"></i></button>
                     <button className="flip image-button" onClick={this.handleRotation}><i className="fas fa-sync-alt"></i></button>

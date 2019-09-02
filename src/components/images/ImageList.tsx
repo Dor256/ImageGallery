@@ -9,17 +9,27 @@ type Props = {
 
 type State = {
     chosenImage: string,
-    index: number | null
+    index: number | null,
+    showModal: boolean
 }
 
 
 class ImageList extends React.Component<Props, State> {
-    state: State = { chosenImage: "", index: null };
+    private documentBody = document.body;
+    state: State = { chosenImage: "", index: null, showModal: false };
 
     enlargeImage = (url: string, index: number) => {
-        this.setState({ chosenImage: url, index: index});
-        document.querySelector(".modal")!.classList.add("show");
-        document.querySelector("body")!.classList.add("no-scroll");
+        if(this.documentBody) {
+            this.setState({ chosenImage: url, index: index, showModal: true });
+            this.documentBody.classList.add("no-scroll");
+        }
+    }
+
+    closeImage = () => {
+        if(this.documentBody) {
+            this.setState({ showModal: false });
+            this.documentBody.classList.remove("no-scroll");
+        }
     }
 
     resetImage = () => {
@@ -60,6 +70,8 @@ class ImageList extends React.Component<Props, State> {
                     resetImage={this.resetImage}
                     nextImage={this.nextImage}
                     previousImage={this.previousImage}
+                    closeModal={this.closeImage}
+                    show={this.state.showModal}
                 />
             </>
         );
