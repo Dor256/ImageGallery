@@ -40,7 +40,7 @@ class ImageCard extends React.Component<Props, State> {
 
     render() {
         return (
-            <div className="card">
+            <div className="card" draggable={true}>
                 {this.renderCardImage()}
                 <div className="overlay">
                     <button className="expand image-button" onClick={this.handleExpand}><i className="fas fa-search-plus"></i></button>

@@ -1,7 +1,7 @@
 .card {
     flex-grow: 1;
     flex-shrink: 1;
-    cursor: pointer;
+    cursor: grab;
 }
 
 .card:hover {
@@ -13,6 +13,10 @@
     .overlay {
         opacity: 1;
     }
+}
+
+.card:active {
+    cursor: grabbing;
 }
 
 .overlay {
@@ -39,6 +43,7 @@
     border: 1px solid;
     padding-bottom: 0;
     border-radius: 30%;
+    cursor: pointer;
 }
 
 .image-button:focus {
