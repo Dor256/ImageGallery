@@ -1,7 +1,10 @@
 .card {
     flex-grow: 1;
-    flex-shrink: 1;
     cursor: grab;
+}
+
+.card:nth-last-child(-n+9) {
+    flex-grow: 0;
 }
 
 .card:hover {

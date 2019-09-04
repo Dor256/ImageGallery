@@ -16,7 +16,7 @@ class App extends React.Component<{}, State> {
         const response = await unsplash.get<UnsplashResponse>("/search/photos", {
             params: {
                 query: term,
-                per_page: "52"
+                per_page: "97"
             }
         });
         this.setState({ images: response.data.results })
@@ -24,7 +24,7 @@ class App extends React.Component<{}, State> {
 
     render() {
         return (
-            <div className="container">
+            <div className="flex-container">
                 <SearchBar onSubmit={this.onSearchSubmit}/>
                 <ImageList images={this.state.images}/>
             </div>

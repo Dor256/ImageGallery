@@ -45,7 +45,7 @@ class ImageCard extends React.Component<Props, State> {
         this.props.swapImages(this.props.index, newIdx);
     }
 
-    handleDragEnd = (event: DragEvent<HTMLDivElement>) => {
+    handleDragEnd = () => {
         this.setState({ isDragging: false });
     }
 
