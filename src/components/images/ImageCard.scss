@@ -14,19 +14,25 @@
     }
 
     .overlay {
-        opacity: 1;
+        visibility: visible;
     }
 }
 
-.dragging {
+.card:active {
     cursor: grabbing;
+}
+
+.dragging {
+    .overlay {
+        display: none;
+    }
 }
 
 .overlay {
     display: flex;
     position: absolute;
     flex-wrap: wrap;
-    opacity: 0;
+    visibility: hidden;
     align-items: center;
     justify-content: space-evenly;
     height: 100%;

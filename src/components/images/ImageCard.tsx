@@ -16,7 +16,11 @@ type State = {
 }
 
 class ImageCard extends React.Component<Props, State> {
-    state = { isLiked: false, isFlipped: false, isDragging: false };
+    state = { 
+        isLiked: false, 
+        isFlipped: false, 
+        isDragging: false
+     };
 
     handleExpand = () => {
         this.props.enlargeImage(this.props.imageURL, this.props.index);
@@ -32,15 +36,19 @@ class ImageCard extends React.Component<Props, State> {
 
     handleDragStart = (event: DragEvent<HTMLDivElement>) => {
         event.dataTransfer.setData("number", this.props.index.toString());
+        event.dataTransfer.effectAllowed = "copyMove";
         this.setState({ isDragging: true });
     }
 
     handleDragOver = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
+        event.dataTransfer.dropEffect = "copy";
     }
+
 
     handleDrop = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
+        this.setState({ isDragging: false });
         const newIdx = parseInt(event.dataTransfer.getData("number"));
         this.props.swapImages(this.props.index, newIdx);
     }
@@ -54,7 +62,7 @@ class ImageCard extends React.Component<Props, State> {
         return (
             <div 
                 className={`card ${dragImageClass}`} 
-                draggable 
+                draggable
                 onDragStart={this.handleDragStart} 
                 onDragOver={this.handleDragOver}
                 onDrop={this.handleDrop}  
