@@ -83,6 +83,23 @@
     transform: scaleX(-1);
 }
 
+.delete-image {
+    position: absolute;
+    top: 1%;
+    right: 3%;
+    color: black;
+    cursor: pointer;
+    font-size: 1.4em;
+}
+
+.delete-image:hover {
+    color: rgb(192, 50, 50);
+}
+
+.delete-image:focus {
+    outline: none;
+}
+
 .fas {
     user-select: none;
 }

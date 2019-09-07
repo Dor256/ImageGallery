@@ -1,4 +1,5 @@
 import React, { DragEvent, createRef } from "react";
+import { RENDER_SPACE_OFFSET } from "../../constants";
 import "./ImageCard.scss";
 
 type Props = {
@@ -6,7 +7,8 @@ type Props = {
     imageURL: string,
     index: number,
     enlargeImage: (url: string, index: number) => void,
-    swapImages: (originalIdx: number, newIdx: number) => void
+    swapImages: (originalIdx: number, newIdx: number) => void,
+    deleteImage: (indexToRemove: number) => void
 }
 
 type State = {
@@ -33,6 +35,10 @@ class ImageCard extends React.Component<Props, State> {
 
     handleRotation = () => {
         this.state.isFlipped ? this.setState({ isFlipped: false }) : this.setState({ isFlipped: true });
+    }
+
+    handleDelete = () => {
+        this.props.deleteImage(this.props.index);
     }
 
     handleDragStart = (event: DragEvent<HTMLDivElement>) => {
@@ -62,7 +68,7 @@ class ImageCard extends React.Component<Props, State> {
         if(this.cardRef.current) {
             const cardTop = this.cardRef.current.getBoundingClientRect().top;
             const cardBottom = this.cardRef.current.getBoundingClientRect().bottom;
-            return cardBottom > -300 && cardTop < window.innerHeight + 300;
+            return cardBottom > -RENDER_SPACE_OFFSET && cardTop < window.innerHeight + RENDER_SPACE_OFFSET;
         }
         return true;
     }
@@ -74,6 +80,7 @@ class ImageCard extends React.Component<Props, State> {
             <>
                 <img className={`card-img-top ${flipImageClass} ${hideImageClass}`} src={this.props.thumbnailURL} alt=""/>
                 <div className={`overlay ${hideImageClass}`}>
+                    <i className="fas fa-times delete-image" onClick={this.handleDelete}></i>
                     <button className="expand image-button" onClick={this.handleExpand}><i className="fas fa-search-plus"></i></button>
                     <button className="flip image-button" onClick={this.handleRotation}><i className="fas fa-sync-alt"></i></button>
                     {this.renderLikeButton()}

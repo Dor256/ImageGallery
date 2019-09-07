@@ -8,7 +8,7 @@ type Props = {
 }
 
 type State = {
-    chosenImage: string,
+    chosenImage: string | null,
     chosenIndex: number | null,
     showModal: boolean,
     imageArray: ImageResult[]
@@ -52,34 +52,41 @@ class ImageList extends React.Component<Props, State> {
     }
 
     resetImage = () => {
-        this.setState({ chosenImage: "" });
+        this.setState({ chosenImage: null });
     }
 
     nextImage = () => {
-        if(this.state.chosenIndex !== null && this.state.chosenIndex < this.props.images.length - 1) {
-            const nextImageURL = this.props.images[this.state.chosenIndex + 1].urls.regular;
+        if(this.state.chosenIndex !== null && this.state.chosenIndex < this.state.imageArray.length - 1) {
+            this.resetImage();
+            const nextImageURL = this.state.imageArray[this.state.chosenIndex + 1].urls.regular;
             this.setState({ chosenImage: nextImageURL, chosenIndex: this.state.chosenIndex + 1 });
         }
     }
 
     previousImage = () => {
         if(this.state.chosenIndex !== null && this.state.chosenIndex! > 0) {
-            const previousImageURL = this.props.images[this.state.chosenIndex - 1].urls.regular;
+            this.resetImage();
+            const previousImageURL = this.state.imageArray[this.state.chosenIndex - 1].urls.regular;
             this.setState({ chosenImage: previousImageURL, chosenIndex: this.state.chosenIndex - 1 });
         }
     }
 
     swapImages = (originalIdx: number, newIdx: number) => {
-        const temp = this.props.images[originalIdx];
-        this.props.images[originalIdx] = this.props.images[newIdx];
-        this.props.images[newIdx] = temp;
-        this.setState({ imageArray: this.props.images });
+        const swappedImageArray = [...this.state.imageArray];
+        const temp = swappedImageArray[originalIdx];
+        swappedImageArray[originalIdx] = swappedImageArray[newIdx];
+        swappedImageArray[newIdx] = temp;
+        this.setState({ imageArray: swappedImageArray });
+    }
+
+    deleteImage = (indexToRemove: number) => {
+        this.setState({ imageArray: this.state.imageArray.filter((image: ImageResult, index: number) => index !== indexToRemove)});
     }
 
     render() {
         return (
             <>
-                {this.props.images.map((image: ImageResult, index: number) => {
+                {this.state.imageArray.map((image: ImageResult, index: number) => {
                     return (
                         <ImageCard 
                             key={image.id}
@@ -88,6 +95,7 @@ class ImageList extends React.Component<Props, State> {
                             imageURL={image.urls.regular}
                             enlargeImage={this.enlargeImage}
                             swapImages={this.swapImages}
+                            deleteImage={this.deleteImage}
                         />
                     );
                 })}
