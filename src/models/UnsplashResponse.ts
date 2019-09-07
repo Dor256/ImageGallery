@@ -1,12 +1,14 @@
+type URLS = {
+    full: string,
+    raw: string,
+    regular: string,
+    small: string,
+    thumb: string
+}
+
 export type ImageResult = {
     id: string,
-    urls: {
-        full: string,
-        raw: string,
-        regular: string,
-        small: string,
-        thumb: string
-    },
+    urls: URLS,
     alt_description: string
 }
 

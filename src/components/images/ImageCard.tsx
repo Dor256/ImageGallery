@@ -1,4 +1,4 @@
-import React, { DragEvent } from "react";
+import React, { DragEvent, createRef } from "react";
 import "./ImageCard.scss";
 
 type Props = {
@@ -16,11 +16,12 @@ type State = {
 }
 
 class ImageCard extends React.Component<Props, State> {
+    private cardRef = createRef<HTMLDivElement>();
     state = { 
         isLiked: false, 
         isFlipped: false, 
         isDragging: false
-     };
+    };
 
     handleExpand = () => {
         this.props.enlargeImage(this.props.imageURL, this.props.index);
@@ -57,11 +58,41 @@ class ImageCard extends React.Component<Props, State> {
         this.setState({ isDragging: false });
     }
 
+    cardInbounds = (): boolean => {
+        if(this.cardRef.current) {
+            const cardTop = this.cardRef.current.getBoundingClientRect().top;
+            const cardBottom = this.cardRef.current.getBoundingClientRect().bottom;
+            return cardBottom > -300 && cardTop < window.innerHeight + 300;
+        }
+        return true;
+    }
+
+    renderCardImage = () => {
+        const hideImageClass = this.cardInbounds() ? "" : "hide-image";
+        const flipImageClass = this.state.isFlipped ? "flipped" : "";
+        return (
+            <>
+                <img className={`card-img-top ${flipImageClass} ${hideImageClass}`} src={this.props.thumbnailURL} alt=""/>
+                <div className={`overlay ${hideImageClass}`}>
+                    <button className="expand image-button" onClick={this.handleExpand}><i className="fas fa-search-plus"></i></button>
+                    <button className="flip image-button" onClick={this.handleRotation}><i className="fas fa-sync-alt"></i></button>
+                    {this.renderLikeButton()}
+                </div>
+            </>
+        );
+    }
+
+    renderLikeButton = () => {
+        const likedImageClass = this.state.isLiked ? "liked" : "";
+        return <button className={`like image-button ${likedImageClass}`} onClick={this.handleLike}><i className="fas fa-heart"></i></button>;
+    }
+
     renderCard = () => {
         const dragImageClass = this.state.isDragging ? "dragging" : "";
         return (
             <div 
                 className={`card ${dragImageClass}`} 
+                ref={this.cardRef}
                 draggable
                 onDragStart={this.handleDragStart} 
                 onDragOver={this.handleDragOver}
@@ -69,23 +100,8 @@ class ImageCard extends React.Component<Props, State> {
                 onDragEnd={this.handleDragEnd}
             >
                 {this.renderCardImage()}
-                <div className="overlay">
-                    <button className="expand image-button" onClick={this.handleExpand}><i className="fas fa-search-plus"></i></button>
-                    <button className="flip image-button" onClick={this.handleRotation}><i className="fas fa-sync-alt"></i></button>
-                    {this.renderLikeButton()}
-                </div>
             </div>
         );
-    }
-
-    renderCardImage = () => {
-        const flipImageClass = this.state.isFlipped ? "flipped" : "";
-        return <img className={`card-img-top ${flipImageClass}`} src={this.props.thumbnailURL} alt=""/>;
-    }
-
-    renderLikeButton = () => {
-        const likedImageClass = this.state.isLiked ? "liked" : "";
-        return <button className={`like image-button ${likedImageClass}`} onClick={this.handleLike}><i className="fas fa-heart"></i></button>;
     }
 
     render() {

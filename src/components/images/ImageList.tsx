@@ -21,10 +21,21 @@ class ImageList extends React.Component<Props, State> {
         chosenImage: "", 
         chosenIndex: null, 
         showModal: false,
-        imageArray: this.props.images 
+        imageArray: this.props.images
     };
 
-    
+    componentDidMount = () => {
+        window.addEventListener("scroll", this.handleScroll);
+    }
+
+    componentWillUnmount = () => {
+        window.removeEventListener("scroll", this.handleScroll);
+    }
+
+    handleScroll = (event: Event) => {
+        event.preventDefault();
+        this.setState(this.state);
+    }
 
     enlargeImage = (url: string, index: number) => {
         if(this.documentBody) {

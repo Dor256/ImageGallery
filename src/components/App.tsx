@@ -16,7 +16,7 @@ class App extends React.Component<{}, State> {
         const response = await unsplash.get<UnsplashResponse>("/search/photos", {
             params: {
                 query: term,
-                per_page: "97"
+                per_page: "300"
             }
         });
         this.setState({ images: response.data.results })
