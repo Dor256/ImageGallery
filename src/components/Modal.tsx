@@ -10,7 +10,6 @@ type Props = {
     nextImage: () => void,
     previousImage: () => void,
     closeModal: () => void,
-    show: boolean
 }
 
 const Modal = (props: Props) => {
@@ -25,9 +24,8 @@ const Modal = (props: Props) => {
     }
 
     const renderModal = () => {
-        const showModalClass = props.show ? "show" : "";
         return (
-            <div className={`modal ${showModalClass}`} onClick={props.closeModal}>
+            <div className="modal" onClick={props.closeModal}>
                 {maybeRenderImage()}
                 <Arrow right nextImage={props.nextImage}/>
                 <Arrow left previousImage={props.previousImage}/>

@@ -83,6 +83,21 @@ class ImageList extends React.Component<Props, State> {
         this.setState({ imageArray: this.state.imageArray.filter((image: ImageResult, index: number) => index !== indexToRemove)});
     }
 
+    maybeRenderModal = () => {
+        if(this.state.showModal) {
+            return (
+                <Modal 
+                    image={this.state.chosenImage} 
+                    imageIndex={this.state.chosenIndex} 
+                    resetImage={this.resetImage}
+                    nextImage={this.nextImage}
+                    previousImage={this.previousImage}
+                    closeModal={this.closeImage}
+                />
+            );
+        } 
+    }
+
     render() {
         return (
             <>
@@ -99,15 +114,7 @@ class ImageList extends React.Component<Props, State> {
                         />
                     );
                 })}
-                <Modal 
-                    image={this.state.chosenImage} 
-                    imageIndex={this.state.chosenIndex} 
-                    resetImage={this.resetImage}
-                    nextImage={this.nextImage}
-                    previousImage={this.previousImage}
-                    closeModal={this.closeImage}
-                    show={this.state.showModal}
-                />
+                {this.maybeRenderModal()}
             </>
         );
     }
