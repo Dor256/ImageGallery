@@ -1,9 +1,9 @@
 import React from "react";
 import unsplash from "../api/unsplash";
 import { UnsplashResponse, ImageResult } from "../models/UnsplashResponse";
-import SearchBar from "./SearchBar";
-import ImageList from "./images/ImageList";
-import Spinner from "./Spinner";
+import { SearchBar } from "./SearchBar";
+import { ImageList } from "./images/ImageList";
+import { Spinner } from "./Spinner";
 import { IMAGES_PER_PAGE } from "../constants";
 import "./App.scss"
 
@@ -11,7 +11,7 @@ type State = {
     images: ImageResult[] | null
 }
 
-class App extends React.Component<{}, State> {
+export class App extends React.Component<{}, State> {
     state: State = { images: [] };
 
     onSearchSubmit = async (term: string) => {
@@ -25,21 +25,13 @@ class App extends React.Component<{}, State> {
         this.setState({ images: response.data.results })
     }
 
-    maybeRenderImageList = () => {
-        if(this.state.images) {
-            return <ImageList images={this.state.images}/>;
-        }
-        return <Spinner/>;
-    }
-
     render() {
+        const { images } = this.state;
         return (
             <div className="flex-container">
                 <SearchBar onSubmit={this.onSearchSubmit}/>
-                {this.maybeRenderImageList()}
+                {images ? <ImageList images={images} /> : <Spinner />}
             </div>
         );
     } 
 }
-
-export default App;

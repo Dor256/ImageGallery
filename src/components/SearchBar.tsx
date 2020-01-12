@@ -9,7 +9,7 @@ type Props = {
     onSubmit: (term: string) => void;
 }
 
-class SearchBar extends React.Component<Props, State> {
+export class SearchBar extends React.Component<Props, State> {
     state = { term: "" };
 
     onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -39,5 +39,3 @@ class SearchBar extends React.Component<Props, State> {
         );
     }
 }
-
-export default SearchBar;

@@ -8,7 +8,7 @@ type Props = {
     previousImage?: () => void
 }
 
-const Arrow = (props: Props) => {
+export const Arrow = (props: Props) => {
     const handleClick = (event: MouseEvent<HTMLSpanElement>) => {
         event.stopPropagation();
         if(props.nextImage && !props.previousImage) {
@@ -25,5 +25,3 @@ const Arrow = (props: Props) => {
         </div>
     );
 }
-
-export default Arrow;

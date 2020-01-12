@@ -1,7 +1,7 @@
 import React from "react";
 import { ImageResult } from "../../models/UnsplashResponse";
-import Modal from "../Modal";
-import ImageCard from "./ImageCard";
+import { Modal } from "../Modal";
+import { ImageCard } from "./ImageCard";
 
 type Props = {
     images: ImageResult[]
@@ -15,7 +15,7 @@ type State = {
 }
 
 
-class ImageList extends React.Component<Props, State> {
+export class ImageList extends React.Component<Props, State> {
     private documentBody = document.body;
     state: State = { 
         chosenImage: "", 
@@ -119,5 +119,3 @@ class ImageList extends React.Component<Props, State> {
         );
     }
 }
-
-export default ImageList;

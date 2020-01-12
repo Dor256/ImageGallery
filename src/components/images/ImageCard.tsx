@@ -1,6 +1,7 @@
 import React, { DragEvent, createRef } from "react";
 import { RENDER_SPACE_OFFSET } from "../../constants";
 import "./ImageCard.scss";
+import { LikeButton } from "../LikeButton";
 
 type Props = {
     thumbnailURL: string,
@@ -17,7 +18,7 @@ type State = {
     isDragging: boolean
 }
 
-class ImageCard extends React.Component<Props, State> {
+export class ImageCard extends React.Component<Props, State> {
     private cardRef = createRef<HTMLDivElement>();
     state = { 
         isLiked: false, 
@@ -83,18 +84,13 @@ class ImageCard extends React.Component<Props, State> {
                     <i className="fas fa-times delete-image" onClick={this.handleDelete}></i>
                     <button className="expand image-button" onClick={this.handleExpand}><i className="fas fa-search-plus"></i></button>
                     <button className="flip image-button" onClick={this.handleRotation}><i className="fas fa-sync-alt"></i></button>
-                    {this.renderLikeButton()}
+                    <LikeButton active={this.state.isLiked} onClick={this.handleLike} />
                 </div>
             </>
         );
     }
 
-    renderLikeButton = () => {
-        const likedImageClass = this.state.isLiked ? "liked" : "";
-        return <button className={`like image-button ${likedImageClass}`} onClick={this.handleLike}><i className="fas fa-heart"></i></button>;
-    }
-
-    renderCard = () => {
+    render() {
         const dragImageClass = this.state.isDragging ? "dragging" : "";
         return (
             <div 
@@ -110,10 +106,4 @@ class ImageCard extends React.Component<Props, State> {
             </div>
         );
     }
-
-    render() {
-        return this.renderCard();
-    }
 }
-
-export default ImageCard;
